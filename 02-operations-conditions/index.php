@@ -44,7 +44,48 @@
     <h2 class="text-center">Comparaisons en PHP</h2>
 
     <div class="bg-gray-200 max-w-lg mx-auto p-4 text-center">
-        
+        <!-- En PHP, on a la fonction var_dump qui va nous aider à debug -->
+        <p>Est-ce que nombre1 == 3 ? <?php var_dump($nombre1 == '3a'); ?></p>
+        <!-- == compare la valeur et === compare la valeur et le type --> 
+        <p>Est-ce que nombre1 === '3' ? <?php var_dump($nombre1 === '3'); ?></p>
+
+        <?php
+            $isLogged = true;
+
+            if ($isLogged) {
+                echo 'Vous êtes connecté';
+            } else {
+                echo 'Vous n\'êtes pas connecté';
+            }
+        ?>
+    </div>
+
+    <h2 class="text-center">Conditions en PHP</h2>
+
+    <div class="bg-gray-200 max-w-lg mx-auto p-4 text-center">
+        <?php
+            // Pour aller au restaurant, on doit avoir le vaccin ou un test PCR
+            $isVaccinated = false;
+            $isTested = true;
+
+            if ($isVaccinated || $isTested) { ?>
+                <p class="text-green-500">Je vais au restaurant</p>
+            <?php } else { ?>
+                <p class="text-red-500">Je ne peux pas aller au restaurant</p>
+            <?php }
+
+            // Si on a aucune des deux conditions
+            if (!$isVaccinated && !$isTested) { ?>
+                <p class="text-blue-500">Il va falloir quelque chose</p>
+            <?php } elseif (!$isVaccinated && $isTested) { ?>
+                <p class="text-blue-500">Faire le vaccin</p>
+            <?php }
+
+            echo $a;
+            echo 1 / 0;
+            echo 'toto';
+            echo 'ça marche ?';
+        ?>
     </div>
 </body>
 </html>
