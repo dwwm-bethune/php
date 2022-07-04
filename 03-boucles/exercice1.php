@@ -43,7 +43,7 @@
 
     <h3>Le PGCD de 96 et 36 est <?= $a; ?></h3>
 
-    <h2>4. Coder le jeu du FizzBuzz</h2>
+    <h2>4. Coder le jeu du FizzBuzz ⭐</h2>
 
     <?php for ($i = 1; $i <= 100; $i++) {
         if ($i % 15 == 0) {
