@@ -36,6 +36,7 @@
         <p>Exo 3 : Noël est dans <?= ceil($days); ?> jours</p>
         <p>
             <?php
+                // BONUS TRADUCTION DES DATES
                 $formatter = IntlDateFormatter::create('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::FULL);
                 $formatter->setPattern('cccc dd MMMM Y');
 
