@@ -20,24 +20,49 @@
             $email = $_POST['email'] ?? null;
             $password = $_POST['password'] ?? null;
             $success = false;
+            $errors = [];
 
             // empty vérifie si le formulaire n'est pas vide donc envoyé
             if (!empty($_POST)) {
                 // Etape 3 - Vérifier le formulaire (POST, erreurs...)
+                if (empty($email)) {
+                    $errors[] = 'L\'email est obligatoire.';
+                }
+
+                if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $errors[] = 'L\'email est invalide.';
+                }
+
+                if (strlen($password) < 8) {
+                    $errors[] = 'Le mot de passe doit faire 8 caractères.';
+                }
 
                 // Etape 4 - Afficher un message de succès ou les erreurs
-                $success = true;
+                if (empty($errors)) {
+                    $success = true;
+                    // Base de données, email...
+                }
             }
         ?>
 
         <?php if ($success) { ?>
-            <h1>Merci <?= $email; ?>, vous êtes bien enregistré avec le mot de passe : <?= $password; ?></h1>
+            <h1 class="bg-green-300 p-5 rounded text-green-800">
+                Merci <?= $email; ?>, vous êtes bien enregistré avec le mot de passe : <?= $password; ?>
+            </h1>
+        <?php } ?>
+
+        <?php if (!empty($errors)) { ?>
+            <div class="bg-red-300 p-5 rounded border border-red-800 text-red-800 my-4">
+                <?php foreach ($errors as $error) { ?>
+                    <p><?= $error; ?></p>
+                <?php } ?>
+            </div>
         <?php } ?>
 
         <form method="post" action="">
             <div class="mb-3">
                 <label for="email" class="block">Email</label>
-                <input class="w-full" type="text" name="email" id="email">
+                <input class="w-full" type="text" name="email" id="email" value="<?= $email; ?>">
             </div>
 
             <div class="mb-3">
