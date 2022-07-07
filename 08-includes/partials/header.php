@@ -1,7 +1,12 @@
 <?php
+    // Le __DIR__ renvoie le chemin du dossier actuel
+    // C:\wamp64\www\08-includes\partials
+    require __DIR__.'/../config/config.php';
+
     $title = isset($title) ? $title : 'Gameshop';
     // La superglobale $_SERVER nous donne accès à pas mal d'informations sur la requête HTTP
     $pageUrl = basename($_SERVER['REQUEST_URI'], '.php'); // /php/index.php => index
+    $pageUrl = pageName();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
