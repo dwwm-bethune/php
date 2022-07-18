@@ -82,7 +82,7 @@
                 ];
             ?>
 
-            <table class="table">
+            <table class="table table-striped">
                 <thead> <!-- Légende du tableau -->
                     <th>Marque</th>
                     <th>Modèle</th>
@@ -90,7 +90,7 @@
                 </thead>
 
                 <?php foreach ($vehicules as $index => $vehicule) { ?>
-                <tr class="<?php echo ($index % 2 == 0) ? 'pair' : ''; ?>">
+                <tr>
                     <td><?php echo $vehicule['marque']; ?></td>
                     <td><?php echo $vehicule['modele']; ?></td>
                     <td><?php echo number_format($vehicule['prix'], 2, ',', ' '); ?> €</td>
@@ -146,7 +146,7 @@
                     return "<$balise>$contenu</$balise>";
                 }
 
-                echo html('Salut', 'h6');
+                echo html('Salut', 'h2');
             ?>
         </div>
     </main>
