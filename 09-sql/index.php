@@ -34,13 +34,14 @@
             <?php foreach ($movies as $movie) { ?>
                 <div class="w-1/2 md:w-1/3 lg:w-1/4">
                     <div class="border rounded-lg shadow m-3">
-                        <div class="p-3">
-                            <h2><?= truncate($movie['title']); ?></h2>
-                            <p class="text-xs text-gray-400"><?= substr($movie['released_at'], 0, 4); ?></p>
-                        </div>
                         <?php if ($movie['cover']) { ?>
-                        <img class="h-[300px] w-full object-cover rounded-b" src="img/<?= $movie['cover']; ?>" alt="<?= $movie['title']; ?>">
+                        <img class="h-[300px] w-full object-cover rounded-t" src="img/<?= $movie['cover']; ?>" alt="<?= $movie['title']; ?>">
                         <?php } ?>
+                        <div class="p-3">
+                            <h2 title="<?= $movie['title']; ?>"><?= truncate($movie['title']); ?></h2>
+                            <p class="text-xs text-gray-400"><?= substr($movie['released_at'], 0, 4); ?></p>
+                            <a href="film.php?id=<?= $movie['id']; ?>" class="px-3 py-2 bg-gray-200 hover:bg-gray-400 duration-500 inline-block rounded-lg mt-3">Voir</a>
+                        </div>
                     </div>
                 </div>
             <?php } ?>
