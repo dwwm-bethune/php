@@ -1,3 +1,9 @@
+<?php
+    require 'config/db.php';
+
+    // Récupèrer les catégories
+    $categories = $db->query('SELECT * FROM category')->fetchAll();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -35,9 +41,13 @@
                 <label for="category">Catégorie</label>
                 <!-- Transformer le input en select avec chaque catégorie en option -->
                 <!-- Pour avoir les catégories, il faudra faire un select en BDD -->
-                <!-- On récupère un tableau, on le parcoure et on affiche autant d'options que de catégorie -->
+                <!-- On récupère un tableau, on le parcours et on affiche autant d'options que de catégorie -->
                 <!-- On affiche le nom de la catégorie et l'id dans l'option -->
-                <input type="text" name="category" id="category">
+                <select name="category" id="category">
+                    <?php foreach ($categories as $category) { ?>
+                        <option value="<?= $category['id']; ?>"><?= $category['name']; ?></option>
+                    <?php } ?>
+                </select>
             </div>
         </form>
     </div>
