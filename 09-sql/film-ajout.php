@@ -116,6 +116,7 @@
                 <!-- On récupère un tableau, on le parcours et on affiche autant d'options que de catégorie -->
                 <!-- On affiche le nom de la catégorie et l'id dans l'option -->
                 <select class="w-full" name="category" id="category">
+                    <option value="" disabled selected>Choisir une catégorie...</option>
                     <?php foreach ($categories as $category) { ?>
                         <option value="<?= $category['id']; ?>"><?= $category['name']; ?></option>
                     <?php } ?>
