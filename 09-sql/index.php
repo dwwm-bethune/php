@@ -28,7 +28,10 @@
     ?>
 
     <div class="max-w-5xl mx-auto">
-        <h1 class="text-center text-xl">Les films</h1>
+        <div class="flex my-8 justify-between items-center">
+            <h1 class="text-center text-3xl">Les films</h1>
+            <a href="film-ajout.php" class="bg-blue-400 hover:bg-blue-600 px-4 py-2 text-white rounded-lg shadow">Ajouter un film</a>
+        </div>
 
         <div class="flex flex-wrap">
             <?php foreach ($movies as $movie) { ?>
