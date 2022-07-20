@@ -5,6 +5,8 @@
     $id = $_GET['id'] ?? null;
 
     // Une requête préparée protège les entrées utilisateurs
+    // @todo Vous allez modifier la requête pour avoir la catégorie du film
+    // @todo On va faire une 2ème requête qui permet d'avoir les acteurs du film en questions
     $query = $db->prepare('SELECT * FROM movie WHERE id = :id');
     $query->bindValue(':id', $id); // On doit remplacer chaque paramètre de la requête préparée
     $query->execute(); // Ne pas oublier d'exécuter la requête

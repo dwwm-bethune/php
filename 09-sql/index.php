@@ -11,7 +11,8 @@
         require 'config/db.php';
 
         // On va écrire une requête SQL dans le PHP
-        $query = $db->query('SELECT * FROM movie');
+        $query = $db->query('SELECT *, m.id as id FROM movie m
+                             LEFT JOIN category c ON m.category_id = c.id');
 
         // On exécute la requête pour avoir un tableau avec tous les films
         $movies = $query->fetchAll(); // Tableau qu'on va parcourir...
@@ -43,6 +44,7 @@
                         <div class="p-3">
                             <h2 title="<?= $movie['title']; ?>"><?= truncate($movie['title']); ?></h2>
                             <p class="text-xs text-gray-400"><?= substr($movie['released_at'], 0, 4); ?></p>
+                            <p class="text-xs text-gray-400"><?= $movie['name']; ?></p>
                             <a href="film.php?id=<?= $movie['id']; ?>" class="px-3 py-2 bg-gray-200 hover:bg-gray-400 duration-500 inline-block rounded-lg mt-3">Voir</a>
                         </div>
                     </div>
