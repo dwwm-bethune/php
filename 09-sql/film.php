@@ -38,7 +38,7 @@
 
         <div class="flex border py-6 rounded-xl shadow bg-white">
             <div class="w-1/2">
-                <img class="w-72 mx-auto" src="img/<?= $movie['cover']; ?>" alt="<?= $movie['title']; ?>">
+                <img class="w-72 mx-auto" src="uploads/<?= $movie['cover']; ?>" alt="<?= $movie['title']; ?>">
             </div>
             <div class="w-1/2">
                 <h1 class="text-center text-3xl mb-4"><?= $movie['title']; ?></h1>

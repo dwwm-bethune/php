@@ -15,7 +15,7 @@
     $releasedAt = sanitize($_POST['released_at'] ?? null);
     $description = sanitize($_POST['description'] ?? null);
     $duration = sanitize($_POST['duration'] ?? null);
-    $cover = sanitize($_POST['cover'] ?? null);
+    $cover = $_FILES['cover'] ?? null;
     $category = intval(sanitize($_POST['category'] ?? null)); // '1; DROP' devient 1
     $errors = [];
     $success = false;
@@ -42,6 +42,19 @@
             $errors['duration'] = 'La durée n\'est pas valide';
         }
 
+        // Vérifier qu'un fichier a été uploadé
+        if ($cover['error'] !== 0) {
+            $errors['cover'] = 'Il manque le fichier.';
+        }
+
+        // Vérifier le type du fichier
+        $mime = !empty($cover['tmp_name']) ? mime_content_type($cover['tmp_name']) : '';
+        $mimeTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
+
+        if (!in_array($mime, $mimeTypes)) {
+            $errors['cover'] = 'Le fichier n\'est pas une image.';
+        }
+
         // Vérification de la catégorie
         $exists = $db->query('SELECT COUNT(id) FROM category WHERE id = '.$category)->fetchColumn();
         if (!$exists) {
@@ -49,6 +62,20 @@
         }
 
         if (empty($errors)) {
+            // Upload du fichier...
+            $file = $cover['tmp_name']; // Emplacement temporaire du fichier
+            $filename = $cover['name']; // Nom du fichier
+            // cv.pdf en ['cv', 'pdf']
+            $path = pathinfo($filename);
+            // cv.pdf => cv-123456.pdf
+            $filename = $path['filename'].'-'.uniqid().'.'.$path['extension'];
+            // Créer un dossier en PHP s'il n'existe pas
+            if (!is_dir('uploads')) {
+                mkdir('uploads');
+            }
+            // Déplacer le fichier dans le dossier uploads...
+            move_uploaded_file($file, 'uploads/'.$filename);
+
             // Requête SQL pour insérer le film
             $query = $db->prepare('INSERT INTO movie (title, released_at, description, duration, cover, category_id)
                 VALUES (:title, :released_at, :description, :duration, :cover, :category_id)');
@@ -57,7 +84,7 @@
                 ':released_at' => $releasedAt,
                 ':description' => $description,
                 ':duration' => $duration,
-                ':cover' => $cover,
+                ':cover' => $filename,
                 ':category_id' => $category,
             ]);
         }
@@ -87,7 +114,7 @@
             <h2 class="text-green-500">Le film a été ajouté.</h2>
         <?php } ?>
 
-        <form action="" method="post" class="w-1/2 mx-auto">
+        <form action="" method="post" enctype="multipart/form-data" class="w-1/2 mx-auto">
             <div class="mb-3">
                 <label for="title" class="block">Titre</label>
                 <input class="w-full" type="text" name="title" id="title">
@@ -107,7 +134,7 @@
             <div class="mb-3">
                 <label for="cover" class="block">Image</label>
                 <!-- @todo Upload de l'image -->
-                <input class="w-full" type="text" name="cover" id="cover">
+                <input class="w-full file:bg-blue-200 file:border-0 file:rounded-lg file:duration-500 hover:file:bg-blue-500 file:px-3 file:py-2 file:cursor-pointer" type="file" name="cover" id="cover">
             </div>
             <div class="mb-3">
                 <label for="category" class="block">Catégorie</label>

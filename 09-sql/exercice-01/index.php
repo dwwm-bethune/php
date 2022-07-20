@@ -25,6 +25,8 @@
             ]);
         }
     }
+
+    $contacts = select('SELECT * FROM contacts');
 ?>
 
 <!DOCTYPE html>
@@ -74,8 +76,6 @@
 
         <div class="flex">
             <?php
-                $contacts = select('SELECT * FROM contacts');
-
                 foreach ($contacts as $contact) { ?>
                     <div class="w-1/4">
                         <h3>Contact <?php echo $contact['id']; ?></h3>

@@ -38,7 +38,7 @@
                 <div class="w-1/2 md:w-1/3 lg:w-1/4">
                     <div class="border rounded-lg shadow m-3">
                         <?php if ($movie['cover']) { ?>
-                        <img class="h-[300px] w-full object-cover rounded-t" src="img/<?= $movie['cover']; ?>" alt="<?= $movie['title']; ?>">
+                        <img class="h-[300px] w-full object-cover rounded-t" src="uploads/<?= $movie['cover']; ?>" alt="<?= $movie['title']; ?>">
                         <?php } ?>
                         <div class="p-3">
                             <h2 title="<?= $movie['title']; ?>"><?= truncate($movie['title']); ?></h2>
