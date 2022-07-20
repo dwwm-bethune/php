@@ -133,7 +133,6 @@
             </div>
             <div class="mb-3">
                 <label for="cover" class="block">Image</label>
-                <!-- @todo Upload de l'image -->
                 <input class="w-full file:bg-blue-200 file:border-0 file:rounded-lg file:duration-500 hover:file:bg-blue-500 file:px-3 file:py-2 file:cursor-pointer" type="file" name="cover" id="cover">
             </div>
             <div class="mb-3">
