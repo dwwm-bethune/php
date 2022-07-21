@@ -1,10 +1,19 @@
 <?php
     session_start();
 
+    // Si la session a expiré, on peut se servir du cookie pour
+    // reconnecter la personne. Il faudra stocker les bonnes informations
+    // dans le cookie.
+    if (!isset($_SESSION['user']) && isset($_COOKIE['fiofio'])) {
+        $_SESSION['user'] = $_COOKIE['fiofio'];
+    }
+
     // Si l'utilisateur veut se déconnecter, on supprimer le user
     // de la session
     if (isset($_GET['logout'])) {
         unset($_SESSION['user']);
+        // Supprimer un cookie
+        setcookie('fiofio');
     }
 
     // Si l'utilisateur n'est pas connecté, on va le rediriger vers index.php

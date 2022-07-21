@@ -27,6 +27,15 @@
                 'user' => $_POST['pseudo'],
                 'theme' => $_POST['theme'],
             ];
+
+            $accept = (bool) ($_POST['accept'] ?? null);
+
+            if ($accept) {
+                // ATTENTION, ceci n'est pas du tout sécurisé car un cookie est modifiable.
+                // Il faudra un token sécurisé (123456abcdef) qui correspondrait à un
+                // utilisateur dans la BDD.
+                setcookie('fiofio', $_POST['pseudo'], time() + 60 * 60 * 24 * 365);
+            }
         }
 
         $theme = $_SESSION['theme'];
@@ -43,6 +52,10 @@
             <option value="blue">Bleu</option>
             <option value="emerald">Vert</option>
         </select>
+        <div>
+            <input type="checkbox" name="accept" id="accept">
+            <label for="accept">Accepter</label>
+        </div>
         <button>Connexion</button>
     </form>
 </body>
