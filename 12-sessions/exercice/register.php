@@ -1,6 +1,11 @@
 <?php
     require 'config/helpers.php';
 
+    // Pour hasher un mot de passe
+    // $hash = password_hash('password', PASSWORD_DEFAULT);
+    // var_dump($hash);
+    // var_dump(password_verify('password', $hash));
+
     // Récupère les données
     $username = post('username');
     $password = post('password');
@@ -18,12 +23,22 @@
             $errors[] = 'Le mot de passe est invalide ou ne correspond pas.';
         }
 
+        // On va vérifier si l'utilisateur existe déjà
+        $user = selectOne('SELECT * FROM user WHERE username = :username', [
+            'username' => $username,
+        ]);
+
+        if ($user) {
+            $errors[] = 'Le pseudo est déjà utilisé.';
+        }
+
         // Si on n'a pas d'erreurs, on inscrit l'utilisateur et on se connecte...
         if (empty($errors)) {
-            insert('INSERT INTO user (username, email, password) VALUES (:username, :email, :password)', [
+            insert('INSERT INTO user (username, email, password, token) VALUES (:username, :email, :password, :token)', [
                 'username' => $username,
                 'email' => $username,
-                'password' => $password,
+                'password' => password_hash($password, PASSWORD_DEFAULT),
+                'token' => bin2hex(random_bytes(16)),
             ]);
 
             $_SESSION['user'] = $username; // On se connecte (avec la session)

@@ -1,5 +1,22 @@
 <?php
     require 'config/helpers.php';
+
+    if (!user() && isset($_COOKIE['remember'])) {
+        $user = selectOne('SELECT * FROM user WHERE token = :token', [
+            'token' => $_COOKIE['remember'],
+        ]);
+
+        if ($user) {
+            $_SESSION['user'] = $user['username'];
+        } else {
+            die('TRICHEUR');
+        }
+    }
+
+    // Redirige vers l'accueil si on n'est pas connecté
+    if (!user()) {
+        header('Location: index.php');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
