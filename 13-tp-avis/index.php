@@ -7,9 +7,8 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="app.css" rel="stylesheet">
 </head>
-<body>
+<body class="font-['Nunito']">
     <div class="max-w-7xl px-3 mx-auto">
         <h1 class="text-5xl my-12">Ch'ti Restaurant</h1>
 
