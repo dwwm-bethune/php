@@ -29,73 +29,29 @@
                 <div class="flex flex-wrap">
                     <div class="w-full lg:w-1/3 text-center">
                         <h1 class="text-yellow-500 mt-4 mb-8 text-4xl">
-                            3.3 / 5
+                            <?= round(reviews_avg($reviews), 1); ?> / 5
                         </h1>
                         <div class="mb-3">
-                            <i class="fas fa-star mr-1 text-yellow-500"></i>
-                            <i class="fas fa-star mr-1 text-yellow-500"></i>
-                            <i class="fas fa-star mr-1 text-yellow-500"></i>
-                            <i class="fas fa-star mr-1 text-yellow-500"></i>
-                            <i class="fas fa-star mr-1 "></i>
+                            <?php for ($i = 0; $i < 5; $i++) { ?>
+                            <i class="fas fa-star mr-1 <?= ($i < ceil(reviews_avg($reviews))) ? 'text-yellow-500' : ''; ?>"></i>
+                            <?php } ?>
                         </div>
-                        <h3 class="text-3xl">4 avis</h3>
+                        <h3><?= count($reviews); ?> avis</h3>
                     </div>
                     <div class="w-full lg:w-1/3">
+                        <?php for ($i = 5; $i > 0; $i--) { ?>
                         <div class="flex items-center justify-center">
                             <div>
-                                5 <i class="fas fa-star text-yellow-500"></i>
+                                <?= $i; ?> <i class="fas fa-star text-yellow-500"></i>
                             </div>
                             <div class="w-2/3 px-6">
                                 <div class="h-4 bg-gray-200 rounded overflow-hidden">
-                                    <div class="h-4 bg-yellow-500" style="width: 25%"></div>
+                                    <div class="h-4 bg-yellow-500" style="width: <?= reviews_percentage_note($reviews, $i); ?>%"></div>
                                 </div>
                             </div>
-                            <div>(1)</div>
+                            <div>(<?= reviews_count_note($reviews, $i); ?>)</div>
                         </div>
-                        <div class="flex items-center justify-center">
-                            <div>
-                                4 <i class="fas fa-star text-yellow-500"></i>
-                            </div>
-                            <div class="w-2/3 px-6">
-                                <div class="h-4 bg-gray-200 rounded overflow-hidden">
-                                    <div class="h-4 bg-yellow-500" style="width: 25%"></div>
-                                </div>
-                            </div>
-                            <div>(1)</div>
-                        </div>
-                        <div class="flex items-center justify-center">
-                            <div>
-                                3 <i class="fas fa-star text-yellow-500"></i>
-                            </div>
-                            <div class="w-2/3 px-6">
-                                <div class="h-4 bg-gray-200 rounded overflow-hidden">
-                                    <div class="h-4 bg-yellow-500" style="width: 0%"></div>
-                                </div>
-                            </div>
-                            <div>(0)</div>
-                        </div>
-                        <div class="flex items-center justify-center">
-                            <div>
-                                2 <i class="fas fa-star text-yellow-500"></i>
-                            </div>
-                            <div class="w-2/3 px-6">
-                                <div class="h-4 bg-gray-200 rounded overflow-hidden">
-                                    <div class="h-4 bg-yellow-500" style="width: 50%"></div>
-                                </div>
-                            </div>
-                            <div>(2)</div>
-                        </div>
-                        <div class="flex items-center justify-center">
-                            <div>
-                                1 <i class="fas fa-star text-yellow-500"></i>
-                            </div>
-                            <div class="w-2/3 px-6">
-                                <div class="h-4 bg-gray-200 rounded overflow-hidden">
-                                    <div class="h-4 bg-yellow-500" style="width: 0%"></div>
-                                </div>
-                            </div>
-                            <div>(0)</div>
-                        </div>
+                        <?php } ?>
                     </div>
                     <div class="w-full lg:w-1/3 text-center">
                         <h3 class="mt-4 mb-3 text-3xl">Laissez votre avis</h3>

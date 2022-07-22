@@ -20,3 +20,32 @@ function format_date($string) {
 
     return $date;
 }
+
+/**
+ * Moyenne des avis
+ */
+function reviews_avg($reviews) {
+    return array_sum(array_column($reviews, 'note')) / count($reviews);
+}
+
+/**
+ * Nombre d'avis pour une note donnée
+ */
+function reviews_count_note($reviews, $note) {
+    $count = 0;
+
+    foreach ($reviews as $review) {
+        if ($review['note'] == $note) {
+            $count++;
+        }
+    }
+
+    return $count;
+}
+
+/**
+ * Pourcentage d'avis pour une note donnée
+ */
+function reviews_percentage_note($reviews, $note) {
+    return reviews_count_note($reviews, $note) * 100 / count($reviews);
+}
