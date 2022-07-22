@@ -1,3 +1,14 @@
+<?php
+    require 'config/helpers.php';
+
+    // Les avis
+    $reviews = [
+        ['name' => 'Fiorella Mota', 'review' => 'Très bon restaurant', 'note' => 5, 'created_at' => '2022-02-09 11:43:12'],
+        ['name' => 'Marina Mota', 'review' => 'Super restaurant', 'note' => 4, 'created_at' => '2022-02-04 08:12:45'],
+        ['name' => 'Matthieu Mota', 'review' => 'Mauvais restaurant', 'note' => 2, 'created_at' => '2022-02-06 18:23:54'],
+    ];
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -156,106 +167,31 @@
         </div>
 
         <div class="py-12">
+            <?php foreach ($reviews as $review) { ?>
             <div class="lg:flex mb-12">
                 <div class="w-full lg:w-1/12">
                     <div class="w-20 h-20 rounded-full bg-yellow-500 text-white text-3xl mx-auto mb-8">
-                        <h3 class="text-center leading-[5rem]">F</h3>
+                        <h3 class="text-center leading-[5rem]"><?= $review['name'][0]; ?></h3>
                     </div>
                 </div>
                 <div class="w-full lg:w-11/12">
                     <div class="border border-gray-300 rounded-md">
-                        <div class="border-b border-gray-300 bg-gray-100 px-3 py-2 rounded-t-md">Fiorella Mota</div>
+                        <div class="border-b border-gray-300 bg-gray-100 px-3 py-2 rounded-t-md"><?= $review['name']; ?></div>
                         <div class="px-3 py-6">
                             <div class="flex justify-between">
                                 <div>
-                                    <i class="fas fa-star mr-1 text-yellow-500"></i>
-                                    <i class="fas fa-star mr-1 text-yellow-500"></i>
-                                    <i class="fas fa-star mr-1 text-yellow-500"></i>
-                                    <i class="fas fa-star mr-1 text-yellow-500"></i>
-                                    <i class="fas fa-star mr-1 text-yellow-500"></i>
-                                    <p>Très bon restaurant</p>
+                                    <?php for ($i = 0; $i < 5; $i++) { ?>
+                                    <i class="fas fa-star mr-1 <?= ($i < $review['note']) ? 'text-yellow-500' : ''; ?>"></i>
+                                    <?php } ?>
+                                    <p><?= $review['review']; ?></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="border-t border-gray-300 bg-gray-100 px-3 py-2 rounded-b-md text-right">mercredi 9 février 2022 à 11h43</div>
+                        <div class="border-t border-gray-300 bg-gray-100 px-3 py-2 rounded-b-md text-right"><?= format_date($review['created_at']); ?></div>
                     </div>
                 </div>
             </div>
-            <div class="lg:flex mb-12">
-                <div class="w-full lg:w-1/12">
-                    <div class="w-20 h-20 rounded-full bg-yellow-500 text-white text-3xl mx-auto mb-8">
-                        <h3 class="text-center leading-[5rem]">M</h3>
-                    </div>
-                </div>
-                <div class="w-full lg:w-11/12">
-                    <div class="border border-gray-300 rounded-md">
-                        <div class="border-b border-gray-300 bg-gray-100 px-3 py-2 rounded-t-md">Marina Mota</div>
-                        <div class="px-3 py-6">
-                            <div class="flex justify-between">
-                                <div>
-                                    <i class="fas fa-star mr-1 text-yellow-500"></i>
-                                    <i class="fas fa-star mr-1 text-yellow-500"></i>
-                                    <i class="fas fa-star mr-1 text-yellow-500"></i>
-                                    <i class="fas fa-star mr-1 text-yellow-500"></i>
-                                    <i class="fas fa-star mr-1 "></i>
-                                    <p>Super restaurant</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="border-t border-gray-300 bg-gray-100 px-3 py-2 rounded-b-md text-right">vendredi 4 février 2022 à 08h12</div>
-                    </div>
-                </div>
-            </div>
-            <div class="lg:flex mb-12">
-                <div class="w-full lg:w-1/12">
-                    <div class="w-20 h-20 rounded-full bg-yellow-500 text-white text-3xl mx-auto mb-8">
-                        <h3 class="text-center leading-[5rem]">M</h3>
-                    </div>
-                </div>
-                <div class="w-full lg:w-11/12">
-                    <div class="border border-gray-300 rounded-md">
-                        <div class="border-b border-gray-300 bg-gray-100 px-3 py-2 rounded-t-md">Matthieu Mota</div>
-                        <div class="px-3 py-6">
-                            <div class="flex justify-between">
-                                <div>
-                                    <i class="fas fa-star mr-1 text-yellow-500"></i>
-                                    <i class="fas fa-star mr-1 text-yellow-500"></i>
-                                    <i class="fas fa-star mr-1 "></i>
-                                    <i class="fas fa-star mr-1 "></i>
-                                    <i class="fas fa-star mr-1 "></i>
-                                    <p>Mauvais restaurant</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="border-t border-gray-300 bg-gray-100 px-3 py-2 rounded-b-md text-right">dimanche 6 février 2022 à 18h23</div>
-                    </div>
-                </div>
-            </div>
-            <div class="lg:flex mb-12">
-                <div class="w-full lg:w-1/12">
-                    <div class="w-20 h-20 rounded-full bg-yellow-500 text-white text-3xl mx-auto mb-8">
-                        <h3 class="text-center leading-[5rem]">M</h3>
-                    </div>
-                </div>
-                <div class="w-full lg:w-11/12">
-                    <div class="border border-gray-300 rounded-md">
-                        <div class="border-b border-gray-300 bg-gray-100 px-3 py-2 rounded-t-md">Matthieu Mota</div>
-                        <div class="px-3 py-6">
-                            <div class="flex justify-between">
-                                <div>
-                                    <i class="fas fa-star mr-1 text-yellow-500"></i>
-                                    <i class="fas fa-star mr-1 text-yellow-500"></i>
-                                    <i class="fas fa-star mr-1 "></i>
-                                    <i class="fas fa-star mr-1 "></i>
-                                    <i class="fas fa-star mr-1 "></i>
-                                    <p>Mauvais restaurant</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="border-t border-gray-300 bg-gray-100 px-3 py-2 rounded-b-md text-right">dimanche 6 février 2022 à 18h23</div>
-                    </div>
-                </div>
-            </div>
+            <?php } ?>
         </div>
     </div>
 </body>
