@@ -12,6 +12,31 @@ function select($sql) {
 }
 
 /**
+ * Permet de faire un insert en SQL.
+ */
+function insert($sql, $bindings = []) {
+    global $db;
+
+    $query = $db->prepare($sql);
+
+    return $query->execute($bindings);
+}
+
+/**
+ * Permet de récupèrer une donnée dans un formulaire.
+ */
+function post($key) {
+    return $_POST[$key] ?? null;
+}
+
+/**
+ * Permet de vérifier qu'un formulaire est soumis.
+ */
+function submit() {
+    return !empty($_POST);
+}
+
+/**
  * Formate une date US en FR
  */
 function format_date($string) {
