@@ -22,10 +22,11 @@
         }
 
         if (empty($errors)) {
-            insert('insert into reviews (name, review, note) values (:name, :review, :note)', [
+            insert('insert into reviews (name, review, note, created_at) values (:name, :review, :note, :created_at)', [
                 'name' => $name,
                 'review' => $review,
                 'note' => $note,
+                'created_at' => date('Y-m-d H:i:s'),
             ]);
 
             $success = 'Votre commentaire a bien été ajouté.';
@@ -94,7 +95,7 @@
         </div>
 
         <?php if ($success) { ?>
-            <div class="alert alert-success mt-5">
+            <div class="bg-emerald-100 text-emerald-600 p-4 mb-4 rounded-lg">
                 <?= $success; ?>
             </div>
             <a href="index.php">Ajouter un autre commentaire</a>
@@ -103,7 +104,7 @@
                 <div class="border-b border-gray-300 bg-gray-100 px-3 py-2 rounded-t-md">Publier un avis</div>
                 <div class="px-3 py-6">
                     <?php if (!empty($errors)) { ?>
-                        <div class="bg-red-300 text-red-600 p-4 mb-4 rounded-lg">
+                        <div class="bg-red-100 text-red-600 p-4 mb-4 rounded-lg">
                             <ul>
                                 <?php foreach ($errors as $error) { ?>
                                     <li><?= $error; ?></li>
