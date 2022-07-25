@@ -54,3 +54,10 @@ $array = [];
 
 preg_match_all($regex1, $string, $array);
 var_dump($array);
+
+// Exercices
+// Domaine: ^([a-z0-9\-]+\.)+[a-z]+$
+// Email: ^[a-z0-9\-]+@[a-z0-9\-]+\.[a-z]+$
+// Téléphone: ^(0|\+33 ){1}(6|7){1}([-. ]?[0-9]{2}){4}$
+// Mot de passe: ^(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\s])([A-Za-z0-9]|[^\w\s]){8,}$
+// Insultes: (con(nard|nasse)?|fuck( off| up)?)

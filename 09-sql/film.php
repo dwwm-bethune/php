@@ -18,8 +18,8 @@
     $movie = $query->fetch();
 
     if (!$movie) {
-        // @todo Faire une vraie 404
-        echo '404';
+        http_response_code(404);
+        require '404.php';
         die();
     }
 
