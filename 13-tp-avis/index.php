@@ -70,7 +70,18 @@
 </head>
 <body class="font-['Nunito']">
     <div class="max-w-7xl px-3 mx-auto">
-        <h1 class="text-5xl my-12">Ch'ti Restaurant</h1>
+        <div class="flex justify-between items-center">
+            <h1 class="text-5xl my-12">Ch'ti Restaurant</h1>
+
+            <?php if (user()) { ?>
+                <div class="flex items-center">
+                    <a href="logout.php"><?= user(); ?></a>
+                    <img class="w-8 h-8 rounded-full ml-3" src="avatar.jpeg" alt="Avatar">
+                </div>
+            <?php } else { ?>
+                <a href="login.php">Se connecter</a>
+            <?php } ?>
+        </div>
 
         <div class="border border-gray-300 rounded-md">
             <div class="border-b border-gray-300 bg-gray-100 px-3 py-2 rounded-t-md">Notre moyenne</div>
@@ -111,7 +122,7 @@
         </div>
 
         <?php if ($success) { ?>
-            <div class="bg-emerald-100 text-emerald-600 p-4 mb-4 rounded-lg">
+            <div class="bg-emerald-100 text-emerald-600 p-4 my-4 rounded-lg">
                 <?= $success; ?>
             </div>
             <a href="index.php">Ajouter un autre commentaire</a>
@@ -132,40 +143,30 @@
                         <div class="mb-3 lg:flex">
                             <label for="name" class="block lg:w-1/3 lg:text-right py-2 pr-6">Nom</label>
                             <div class="lg:w-1/2">
-                                <input type="text" class="w-full border-gray-300 rounded-lg" name="name" id="name" placeholder="Votre nom" value="">
+                                <?php if (user()) { ?>
+                                    <input type="text" readonly class="w-full border-gray-300 rounded-lg" name="name" id="name" placeholder="Votre nom" value="<?= user(); ?>">
+                                <?php } else { ?>
+                                    <input type="text" class="w-full border-gray-300 rounded-lg" name="name" id="name" placeholder="Votre nom" value="<?= $name; ?>">
+                                <?php } ?>
                             </div>
                         </div>
 
                         <div class="mb-3 lg:flex">
                             <label for="review" class="block lg:w-1/3 lg:text-right py-2 pr-6">Commentaire</label>
                             <div class="lg:w-1/2">
-                                <textarea class="w-full border-gray-300 rounded-lg" name="review" id="review" placeholder="Votre commentaire"></textarea>
+                                <textarea class="w-full border-gray-300 rounded-lg" name="review" id="review" placeholder="Votre commentaire"><?= $review; ?></textarea>
                             </div>
                         </div>
 
                         <div class="mb-3 lg:flex items-center">
                             <label for="note" class="block lg:w-1/3 lg:text-right py-2 pr-6">Note</label>
                             <div class="lg:w-1/2 flex">
+                                <?php for ($i = 1; $i <= 5; $i++) { ?>
                                 <div class="mr-4 flex items-center">
-                                    <input class="border-gray-300 mr-2" type="radio" name="note" id="note-1" value="1">
-                                    <label for="note-1">1</label>
+                                    <input class="border-gray-300 mr-2" type="radio" name="note" id="note-<?= $i; ?>" value="<?= $i; ?>">
+                                    <label for="note-<?= $i; ?>"><?= $i; ?></label>
                                 </div>
-                                <div class="mr-4 flex items-center">
-                                    <input class="border-gray-300 mr-2" type="radio" name="note" id="note-2" value="2">
-                                    <label for="note-2">2</label>
-                                </div>
-                                <div class="mr-4 flex items-center">
-                                    <input class="border-gray-300 mr-2" type="radio" name="note" id="note-3" value="3">
-                                    <label for="note-3">3</label>
-                                </div>
-                                <div class="mr-4 flex items-center">
-                                    <input class="border-gray-300 mr-2" type="radio" name="note" id="note-4" value="4">
-                                    <label for="note-4">4</label>
-                                </div>
-                                <div class="mr-4 flex items-center">
-                                    <input class="border-gray-300 mr-2" type="radio" name="note" id="note-5" value="5">
-                                    <label for="note-5">5</label>
-                                </div>
+                                <?php } ?>
                             </div>
                         </div>
 
