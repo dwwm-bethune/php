@@ -5,6 +5,7 @@
     $name = post('name');
     $review = post('review');
     $note = post('note');
+    $meal = files('meal');
     $errors = [];
     $success = null;
 
@@ -21,11 +22,26 @@
             $errors[] = 'Votre note doit être entre 1 et 5.';
         }
 
+        if ($meal['error'] == 0) {
+            if ($meal['size'] > 4096) {
+                $errors[] = 'Votre image doit faire 4ko maximum.';
+            }
+
+            $mime = mime_content_type($meal['tmp_name']);
+
+            if (!in_array($mime, ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'])) {
+                $errors[] = 'Votre fichier doit être une image.';
+            }
+        }
+
         if (empty($errors)) {
-            insert('insert into reviews (name, review, note, created_at) values (:name, :review, :note, :created_at)', [
+            $filename = upload($meal);
+
+            insert('insert into reviews (name, review, note, image, created_at) values (:name, :review, :note, :image, :created_at)', [
                 'name' => $name,
                 'review' => $review,
                 'note' => $note,
+                'image' => $filename,
                 'created_at' => date('Y-m-d H:i:s'),
             ]);
 
@@ -189,6 +205,9 @@
                                     <i class="fas fa-star mr-1 <?= ($i < $review['note']) ? 'text-yellow-500' : ''; ?>"></i>
                                     <?php } ?>
                                     <p><?= $review['review']; ?></p>
+                                    <?php if ($review['image']) { ?>
+                                    <img width="100" src="<?= $review['image']; ?>" alt="<?= $review['name']; ?>">
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
