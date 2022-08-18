@@ -47,6 +47,10 @@ function submit() {
  * Permet de faire un upload dans un dossier.
  */
 function upload($pfile, $directory = 'uploads') {
+    if ($pfile['error'] != 0) {
+        return null;
+    }
+
     if (!is_dir($directory)) {
         mkdir($directory);
     }
